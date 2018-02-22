@@ -31,14 +31,14 @@ int main() {
   int computer_gun;
   int victory = 0;
   int defeat = 0;
-  int tie =0;
+  int tie = 0;
   
   // Seed the Random Number Generator
   srand(time(0));
 
-cout << "Welcome to Shoot out! \n \nPress any key to continue" << endl;
-reader.readString();
-ClearScreen();
+  cout << "Welcome to Shoot out! \n \nPress any key to continue" << endl;
+  reader.readString();
+  ClearScreen();
   
   // GAME LOOP
   do {
@@ -47,49 +47,65 @@ ClearScreen();
   computer_dead = false; 
   draw = false;
   user_gun = 0;
-  computer_gun = 0;
+  computer_gun = 1;
+
+  cout << "Ememy Gun: Unloaded                       Your Gun: Unloaded" <<
+      endl<<endl;
+  cout << "Let's do this! \n\"r\" for reload - "<< endl;
+  cout << "\"s\" for shoot (if gun is loaded) - "  << endl;
+  cout << "\"b\" for block" << endl;
+
+  player_choice = tolower(reader.readChar("BbRr"));
+
+  ClearScreen();
+
+ if(player_choice == 'r') {
+  user_gun = 1;
+  cout << "Locked and loaded." << endl;
+}
+ else {cout << "A little jumpy huh..." << endl;}
 
   do {
     if (user_gun == 0 && computer_gun == 0) {
      cout << "Ememy Gun: Unloaded                       Your Gun: Unloaded" <<
+     endl<<endl;
+}
+    else if (user_gun == 0 && computer_gun != 0) {
+    cout << " Enemy Gun: Loaded                     Your Gun: Unloaded " <<
+    endl<<endl;
+}
+    else if (user_gun != 0 && computer_gun == 0) {
+     cout << " Enemy Gun: Unloaded                     Your Gun: Loaded " << 
+     endl<<endl;
+}
+    else { cout << " Enemy Gun: Loaded                     Your Gun: Loaded " <<
       endl<<endl;
-}
-else if (user_gun == 0 && computer_gun != 0) {
- cout << " Enemy Gun: Loaded                     Your Gun: Unloaded " <<
-  endl<<endl;
-}
-else if (user_gun != 0 && computer_gun == 0) {
- cout << " Enemy Gun: Unloaded                     Your Gun: Loaded " << 
-  endl<<endl;
-}
-else { cout << " Enemy Gun: Loaded                     Your Gun: Loaded " <<
- endl<<endl;
 }
 
   cout << "Make your move! \n\"r\" for reload - "<< endl;
   cout << "\"s\" for shoot (if gun is loaded) - "  << endl;
   cout << "\"b\" for block" << endl;
 
-if(user_gun == 0) {
-player_choice = tolower(reader.readChar("BbRr"));
+ if(user_gun == 0) {
+  player_choice = tolower(reader.readChar("BbRr"));
 }
-else {
-player_choice = tolower(reader.readChar("BbSs"));
+ else {
+   player_choice = tolower(reader.readChar("BbSs"));
 }
 
 ClearScreen();
 
-if(computer_gun == 0) {
-  computer_choice = rand() % 2;
+ if(computer_gun == 0) {
+   computer_choice = rand() % 2;
 }
-else {
-  computer_choice = rand() % 2 +1;
+ else {
+   computer_choice = rand() % 2 +1;
 }
 
-if(player_choice == 'r' && computer_choice == 0) { 
-  user_gun = 1;
-  computer_gun = 1;
-  cout << "Locked and loaded." << endl; 
+  if(player_choice == 'r' && computer_choice == 0) { 
+    user_gun = 1;
+    computer_gun = 1;
+    cout << "Locked and loaded." << endl; 
 }
   else if(player_choice == 'r' && computer_choice == 1) {
     user_gun = 1;
